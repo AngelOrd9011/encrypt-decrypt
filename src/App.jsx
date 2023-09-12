@@ -7,11 +7,11 @@ function App() {
 	return (
 		<div className="app">
 			<div className="grid">
-				<div className="col-6">
+				<div className="col-12 md:col-6">
 					{' '}
 					<EncryptText />
 				</div>
-				<div className="col-6">
+				<div className="col-12 md:col-6">
 					{' '}
 					<DecryptText />
 				</div>
