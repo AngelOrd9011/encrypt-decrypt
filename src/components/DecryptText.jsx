@@ -35,7 +35,7 @@ const DecryptText = () => {
 					<button onClick={showKey}>{showBtn}</button>
 				</div>
 				<div className="input-textarea">
-					<label htmlFor="text">Hash a de-encriptar</label>
+					<label htmlFor="text">Texto a des-encriptar</label>
 					<br />
 					<textarea name="text" onChange={(event) => setText(event.target.value)} />
 				</div>
