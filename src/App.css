@@ -6,6 +6,12 @@
 	padding: 0 5rem;
 }
 
+@media (max-width: 600px) {
+	.app {
+		padding: 0 2rem !important;
+	}
+}
+
 h1 {
 	font-size: 3.2em;
 	line-height: 1.1;
@@ -44,8 +50,9 @@ button:focus-visible {
 	min-height: 5rem;
 	padding: 0.3rem 0;
 }
-.input-text input {
-	min-height: 1.5rem;
+.input-text input,
+.input-text select {
+	min-height: 1.5rem !important;
 	width: 40%;
 	font-size: 1rem;
 }

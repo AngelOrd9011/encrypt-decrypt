@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { AES, enc } from 'crypto-js';
 
-const DecryptText = () => {
+const DecryptText = ({ algorithms, optionsTemplate }) => {
 	const [secretKey, setSecretKey] = useState(null);
 	const [text, setText] = useState(null);
 	const [decryptText, setDecryptText] = useState('');
 	const [error, setError] = useState(null);
 	const [show, setShow] = useState('password');
 	const [showBtn, setShowBtn] = useState('Mostrar');
+	const [selected, setSelected] = useState(AES);
 
 	const showKey = () => {
 		let _show = show === 'password' ? 'text' : 'password';
@@ -20,18 +21,31 @@ const DecryptText = () => {
 		if (!text || !secretKey) setError('Ambos campos son obligatorios');
 		else {
 			setError(null);
-			let _decryptText = AES.decrypt(text, secretKey).toString(enc.Utf8);
+			let _decryptText = selected.decrypt(text, secretKey).toString(enc.Utf8);
 			setDecryptText(_decryptText);
 		}
 	};
+
+	const onSelectChange = (opt) => {
+		let _selected = algorithms.find((alg) => alg.name === opt);
+		setSelected(_selected.algorithm);
+	};
+
 	return (
 		<>
 			<h1>Des-encriptar texto</h1>
 			<section className="form">
 				<div className="input-text">
+					<label htmlFor="select-alg">Selecciona un algoritmo</label>
+					<br />
+					<select name="select-alg" onChange={(event) => onSelectChange(event.target.value)}>
+						{optionsTemplate()}
+					</select>
+				</div>
+				<div className="input-text">
 					<label htmlFor="secret-key">Palabra clave</label>
 					<br />
-					<input id="secret-key" name="secret-key" type={show} onChange={(event) => setSecretKey(event.target.value)} />
+					<input name="secret-key" type={show} onChange={(event) => setSecretKey(event.target.value)} />
 					<button onClick={showKey}>{showBtn}</button>
 				</div>
 				<div className="input-textarea">
